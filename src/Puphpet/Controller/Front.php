@@ -110,12 +110,12 @@ class Front extends Controller
     }
 
     /**
-     * @param Application $app
-     * @param array $templates
-     * @param string $boxname
-     * @param string $webserver
-     * @param string $database
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     * @param Application $app  Silex app
+     * @param array $templates  Array custom containing generated files
+     * @param string $boxname   Name of download file
+     * @param string $webserver Apache/Nginx
+     * @param string $database  Mysql/PostgreSQL
+     * @return \Symfony\Component\HttpFoundation\StreamedResponse File streaming for download
      */
     protected function generateFile(Application $app, array $templates, $boxname, $webserver, $database)
     {
