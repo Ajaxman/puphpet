@@ -89,9 +89,6 @@ class Front extends Controller
         $formatter->bindRequest($request);
         $manifestConfiguration = $formatter->format();
 
-        /** @var Domain\Compiler\Compiler $manifestCompiler */
-        $manifestCompiler = $app['manifest_compiler'];
-
         $webserver = $manifestConfiguration['webserver'];
         $database = $manifestConfiguration['database'];
 
@@ -99,22 +96,38 @@ class Front extends Controller
         $box = $request->request->get('box');
         $boxConfiguration = ['box' => $box];
 
-        $templates = [
-            'manifest'    => $manifestCompiler->compile($manifestConfiguration),
-            'vagrantFile' => $this->twig()->render('Vagrant/Vagrantfile.twig', $boxConfiguration),
-            'readme'      => $app['readme_compiler']->compile(array_merge($manifestConfiguration, $boxConfiguration)),
-            'bashaliases' => $manifestConfiguration['server']['bashaliases'],
-        ];
+        $templates = $this->generateTemplates($app, $manifestConfiguration, $boxConfiguration);
 
         return $this->generateFile($app, $templates, $box['name'], $webserver, $database);
     }
 
     /**
-     * @param Application $app  Silex app
-     * @param array $templates  Array custom containing generated files
-     * @param string $boxname   Name of download file
-     * @param string $webserver Apache/Nginx
-     * @param string $database  Mysql/PostgreSQL
+     * @param Application $app                   Silex app
+     * @param array       $manifestConfiguration Manifest configuration array
+     * @param array       $boxConfiguration      Vagrantfile configuration array
+     *
+     * @return array
+     */
+    protected function generateTemplates(Application $app, array $manifestConfiguration, array $boxConfiguration)
+    {
+        /** @var Domain\Compiler\Compiler $manifestCompiler */
+        $manifestCompiler = $app['manifest_compiler'];
+
+        return [
+            'manifest'    => $manifestCompiler->compile($manifestConfiguration),
+            'vagrantFile' => $this->twig()->render('Vagrant/Vagrantfile.twig', $boxConfiguration),
+            'readme'      => $app['readme_compiler']->compile(array_merge($manifestConfiguration, $boxConfiguration)),
+            'bashaliases' => $manifestConfiguration['server']['bashaliases'],
+        ];
+    }
+
+    /**
+     * @param Application $app       Silex app
+     * @param array       $templates Array custom containing generated files
+     * @param string      $boxname   Name of download file
+     * @param string      $webserver Apache/Nginx
+     * @param string      $database  Mysql/PostgreSQL
+     *
      * @return \Symfony\Component\HttpFoundation\StreamedResponse File streaming for download
      */
     protected function generateFile(Application $app, array $templates, $boxname, $webserver, $database)
