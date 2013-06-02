@@ -154,12 +154,11 @@ class Front extends Controller
         );
         $file = $domainFile->getArchivePath();
 
-        $stream = function () use ($file) {
-            readfile($file);
-        };
+        /** @var Domain\FileResponse $fileResponse */
+        $fileResponse = $app['fileResponse'];
 
-        return $this->app->stream(
-            $stream,
+        return $fileResponse->sendFile(
+            $file,
             200,
             [
                 'Pragma'                    => 'public',

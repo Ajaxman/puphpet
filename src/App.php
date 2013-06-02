@@ -70,5 +70,8 @@ $app['property_access_provider'] = function () {
 $app['edition'] = function () use ($app) {
     return new Puphpet\Domain\Configuration\Edition($app['property_access_provider']);
 };
+$app['fileResponse'] = function () use ($app) {
+    return new Puphpet\Domain\FileResponse;
+};
 
 return $app;
