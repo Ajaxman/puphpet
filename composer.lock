@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "165e63fc440ca4af478409359e6c737f",
+    "hash": "f8e57d2e9a912578ffbf7515a1171522",
     "packages": [
         {
             "name": "igorw/config-service-provider",
@@ -424,12 +424,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpKernel.git",
-                "reference": "81e7d3b9e156bd273ebd974df2a4a7df7eae9437"
+                "reference": "9f9061ddb9f1523800a08d2bff18e7a78b8bc771"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/81e7d3b9e156bd273ebd974df2a4a7df7eae9437",
-                "reference": "81e7d3b9e156bd273ebd974df2a4a7df7eae9437",
+                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/9f9061ddb9f1523800a08d2bff18e7a78b8bc771",
+                "reference": "9f9061ddb9f1523800a08d2bff18e7a78b8bc771",
                 "shasum": ""
             },
             "require": {
@@ -484,7 +484,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "http://symfony.com",
-            "time": "2013-05-27 14:47:40"
+            "time": "2013-06-02 16:01:55"
         },
         {
             "name": "symfony/property-access",
@@ -675,12 +675,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "2412f9950036ade5e89581e648edbe04e8fe2681"
+                "reference": "v2.2.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/2412f9950036ade5e89581e648edbe04e8fe2681",
-                "reference": "2412f9950036ade5e89581e648edbe04e8fe2681",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/v2.2.2",
+                "reference": "v2.2.2",
                 "shasum": ""
             },
             "require": {
@@ -766,6 +766,89 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "emanueleminotto/faker-service-provider",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/EmanueleMinotto/FakerServiceProvider.git",
+                "reference": "dedf255efaaa94d00f8af44bf5faeae6d3c557e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/EmanueleMinotto/FakerServiceProvider/zipball/dedf255efaaa94d00f8af44bf5faeae6d3c557e6",
+                "reference": "dedf255efaaa94d00f8af44bf5faeae6d3c557e6",
+                "shasum": ""
+            },
+            "require": {
+                "fzaninotto/faker": "1.1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "EmanueleMinotto": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emanuele Minotto",
+                    "email": "minottoemanuele@gmail.com",
+                    "homepage": "http://emanueleminotto.wordpress.com/"
+                }
+            ],
+            "description": "Faker Service Provider for Silex",
+            "time": "2013-02-06 15:50:34"
+        },
+        {
+            "name": "fzaninotto/faker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker.git",
+                "reference": "fac6c177c87bb5d10d256d9caa6933046fbac999"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/fac6c177c87bb5d10d256d9caa6933046fbac999",
+                "reference": "fac6c177c87bb5d10d256d9caa6933046fbac999",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Faker": "src/",
+                    "Faker\\PHPUnit": "test/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "time": "2013-05-31 17:07:37"
+        },
         {
             "name": "phpunit/php-code-coverage",
             "version": "dev-master",
@@ -1012,12 +1095,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a192c684a25376c44754ea65206c7cad9dfe9a95"
+                "reference": "21933e7bb07a4e98c314bdca49c93b2bc0f7fbe2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a192c684a25376c44754ea65206c7cad9dfe9a95",
-                "reference": "a192c684a25376c44754ea65206c7cad9dfe9a95",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/21933e7bb07a4e98c314bdca49c93b2bc0f7fbe2",
+                "reference": "21933e7bb07a4e98c314bdca49c93b2bc0f7fbe2",
                 "shasum": ""
             },
             "require": {
@@ -1081,7 +1164,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2013-05-30 20:23:01"
+            "time": "2013-06-01 10:07:23"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1295,12 +1378,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/BrowserKit.git",
-                "reference": "925c734a11eb3af79689e0edc0f16e90327243f8"
+                "reference": "v2.2.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/925c734a11eb3af79689e0edc0f16e90327243f8",
-                "reference": "925c734a11eb3af79689e0edc0f16e90327243f8",
+                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/v2.2.2",
+                "reference": "v2.2.2",
                 "shasum": ""
             },
             "require": {
@@ -1557,7 +1640,8 @@
         "jtreminio/vagrant-puppet-lamp": 20,
         "jfryman/puppet-nginx": 20,
         "phpunit/phpunit": 20,
-        "whatthejeff/nyancat-phpunit-resultprinter": 20
+        "whatthejeff/nyancat-phpunit-resultprinter": 20,
+        "emanueleminotto/faker-service-provider": 20
     },
     "platform": {
         "php": ">=5.4.0"
