@@ -91,7 +91,6 @@ class Front extends Controller
 
         /** @var Domain\Compiler\Compiler $manifestCompiler */
         $manifestCompiler = $app['manifest_compiler'];
-        $manifest = $manifestCompiler->compile($manifestConfiguration);
 
         $webserver = $manifestConfiguration['webserver'];
         $database = $manifestConfiguration['database'];
@@ -99,8 +98,27 @@ class Front extends Controller
         // build Vagrantfile
         $box = $request->request->get('box');
         $boxConfiguration = ['box' => $box];
-        $vagrantFile = $this->twig()->render('Vagrant/Vagrantfile.twig', $boxConfiguration);
 
+        $templates = [
+            'manifest'    => $manifestCompiler->compile($manifestConfiguration),
+            'vagrantFile' => $this->twig()->render('Vagrant/Vagrantfile.twig', $boxConfiguration),
+            'readme'      => $app['readme_compiler']->compile(array_merge($manifestConfiguration, $boxConfiguration)),
+            'bashaliases' => $manifestConfiguration['server']['bashaliases'],
+        ];
+
+        return $this->generateFile($app, $templates, $box['name'], $webserver, $database);
+    }
+
+    /**
+     * @param Application $app
+     * @param array $templates
+     * @param string $boxname
+     * @param string $webserver
+     * @param string $database
+     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     */
+    protected function generateFile(Application $app, array $templates, $boxname, $webserver, $database)
+    {
         /**@var $domainFile Domain\File build the archive */
         $domainFile = $app['domain_file'];
 
@@ -112,16 +130,13 @@ class Front extends Controller
             $domainFile->addModuleSource('postgresql', VENDOR_PATH . '/puppetlabs/postgresql');
         }
 
-        $readme = $app['readme_compiler']->compile(array_merge($manifestConfiguration, $boxConfiguration));
-
-
         // creating and building the archive
         $domainFile->createArchive(
             [
-                'README'                                  => $readme,
-                'Vagrantfile'                             => $vagrantFile,
-                'manifests/default.pp'                    => $manifest,
-                'modules/puphpet/files/dot/.bash_aliases' => $manifestConfiguration['server']['bashaliases'],
+                'README'                                  => $templates['readme'],
+                'Vagrantfile'                             => $templates['vagrantFile'],
+                'manifests/default.pp'                    => $templates['manifest'],
+                'modules/puphpet/files/dot/.bash_aliases' => $templates['bashaliases'],
             ]
         );
         $file = $domainFile->getArchivePath();
@@ -140,7 +155,7 @@ class Front extends Controller
                 'Last-Modified'             => gmdate('D, d M Y H:i:s', filemtime($file)) . ' GMT',
                 'Content-Type'              => 'application/zip',
                 'Content-Length'            => filesize($file),
-                'Content-Disposition'       => 'attachment; filename="' . $box['name'] . '.zip"',
+                'Content-Disposition'       => 'attachment; filename="' . $boxname . '.zip"',
                 'Content-Transfer-Encoding' => 'binary',
                 'Connection'                => 'close',
             ]
