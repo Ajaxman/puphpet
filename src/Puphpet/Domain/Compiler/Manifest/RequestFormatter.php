@@ -43,7 +43,8 @@ class RequestFormatter implements FormatterInterface
      * Builds and returns formatted configuration
      * which could be used within templates
      *
-     * @return string
+     * @return array
+     * @throws \InvalidArgumentException
      */
     public function format()
     {
@@ -75,12 +76,19 @@ class RequestFormatter implements FormatterInterface
      *
      * @param  string $key
      * @param  string|null $default
+     *
+     * @return mixed
      */
     private function get($key, $default = null)
     {
         return $this->request->request->get($key, $default);
     }
 
+    /**
+     * Tells which webserver has been chosen
+     *
+     * @return string Webserver name
+     */
     protected function getWebserver()
     {
         if (null === $this->webserver) {
