@@ -154,10 +154,7 @@ class Front extends Controller
         );
         $file = $domainFile->getArchivePath();
 
-        /** @var Domain\FileResponse $fileResponse */
-        $fileResponse = $app['fileResponse'];
-
-        return $fileResponse->sendFile(
+        return $app->sendFile(
             $file,
             200,
             [
